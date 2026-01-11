@@ -200,9 +200,18 @@
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
+    <script src="config.js"></script>
+<script>
+   // OLD WAY (Delete this):
+   // let apiKey = "AIzaSy..."; 
+
+   // NEW RIGHTEOUS WAY:
+   // We pull the key from the config file we just loaded
+   const apiKey = SECRET_CONFIG.API_KEY;
+</script>
     <script>
         // --- API CONFIGURATION ---
-        let apiKey = ""; 
+        const apiKey = SECRET_CONFIG.API_KEY;
         const model = "gemini-2.5-flash-preview-09-2025";
         
         // Function to update URL with current key
