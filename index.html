@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOONLIGHT PROTOCOL | TPLINK GRID</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #020617; /* Slate 950 */
+            color: #e2e8f0; /* Slate 200 */
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .brand {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+        }
+        .node-active {
+            box-shadow: 0 0 20px rgba(217, 70, 239, 0.4); /* Fuchsia glow */
+            border-color: rgba(217, 70, 239, 0.6);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(6, 182, 212, 0.02), transparent);
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+            z-index: 50;
+        }
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+    </style>
+</head>
+<body class="grid-bg min-h-screen relative selection:bg-cyan-500 selection:text-black">
+    <div class="scan-line"></div>
+
+    <!-- HEADER -->
+    <header class="fixed top-0 w-full z-40 glass-panel border-b border-cyan-900/50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-3 h-3 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_10px_#06b6d4]"></div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-widest text-cyan-400 brand">MOONLIGHT<span class="text-white">PROTOCOL</span></h1>
+            </div>
+            <div class="flex items-center gap-4 text-xs md:text-sm">
+                <div class="hidden md:flex items-center gap-2 text-slate-400">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span>SYSTEM ONLINE</span>
+                </div>
+                <div class="font-mono text-cyan-700">V.2.5.0-BETA</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN GRID -->
+    <main class="pt-24 pb-32 px-4 max-w-7xl mx-auto">
+        
+        <!-- INTRO HERO -->
+        <section class="mb-12 text-center relative">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -z-10"></div>
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">DISTRIBUTED <span class="text-fuchsia-500">COMPUTE</span> ARCHITECTURE</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
+                The Moonlight Protocol leverages Thin-Film Virtualization to decentralized processing power across the TPLINK Grid. 
+                Interact with the nodes below to analyze system components.
+            </p>
+        </section>
+
+        <!-- INFOGRAPHIC NODES -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- NODE 1 -->
+            <article class="glass-panel p-6 rounded-lg hover:border-cyan-500 transition-colors duration-300 group">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-lg text-cyan-400">NODE 01: VTB LAYER</h3>
+                    <span class="text-xs text-slate-500 border border-slate-700 px-2 py-1 rounded">ACTIVE</span>
+                </div>
+                <p class="text-sm text-slate-300 mb-4 h-20">
+                    Virtual Thin-Film Batteries providing micro-storage for localized compute tasks.
+                </p>
+                <button onclick="triggerGridAnalysis('Explain VTB (Virtual Thin-Film Battery) tech in sci-fi style', 'output-01')" class="w-full bg-slate-800 hover:bg-cyan-900/30 border border-cyan-900/50 hover:border-cyan-500 text-cyan-400 text-xs py-2 rounded transition-all uppercase tracking-wider">
+                    Analyze Component
+                </button>
+                <div id="output-01" class="mt-4 p-3 bg-black/40 rounded border-l-2 border-fuchsia-500 text-xs text-slate-300 hidden font-mono"></div>
+            </article>
+
+            <!-- NODE 2 -->
+            <article class="glass-panel p-6 rounded-lg hover:border-cyan-500 transition-colors duration-300 group">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-lg text-cyan-400">NODE 02: NEURAL SYNC</h3>
+                    <span class="text-xs text-slate-500 border border-slate-700 px-2 py-1 rounded">IDLE</span>
+                </div>
+                <p class="text-sm text-slate-300 mb-4 h-20">
+                    Latency-free synchronization between biological inputs and digital outputs.
+                </p>
+                <button onclick="triggerGridAnalysis('Explain Neural Synchronization in distributed systems sci-fi style', 'output-02')" class="w-full bg-slate-800 hover:bg-cyan-900/30 border border-cyan-900/50 hover:border-cyan-500 text-cyan-400 text-xs py-2 rounded transition-all uppercase tracking-wider">
+                    Analyze Component
+                </button>
+                <div id="output-02" class="mt-4 p-3 bg-black/40 rounded border-l-2 border-fuchsia-500 text-xs text-slate-300 hidden font-mono"></div>
+            </article>
+
+            <!-- NODE 3 -->
+            <article class="glass-panel p-6 rounded-lg hover:border-cyan-500 transition-colors duration-300 group">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-lg text-cyan-400">NODE 03: SHARD DATA</h3>
+                    <span class="text-xs text-slate-500 border border-slate-700 px-2 py-1 rounded">UPLOADING</span>
+                </div>
+                <p class="text-sm text-slate-300 mb-4 h-20">
+                    Fragmentation protocols for secure, redundant storage across the mesh network.
+                </p>
+                <button onclick="triggerGridAnalysis('Explain Data Sharding in mesh networks sci-fi style', 'output-03')" class="w-full bg-slate-800 hover:bg-cyan-900/30 border border-cyan-900/50 hover:border-cyan-500 text-cyan-400 text-xs py-2 rounded transition-all uppercase tracking-wider">
+                    Analyze Component
+                </button>
+                <div id="output-03" class="mt-4 p-3 bg-black/40 rounded border-l-2 border-fuchsia-500 text-xs text-slate-300 hidden font-mono"></div>
+            </article>
+
+        </div>
+
+    </main>
+
+    <!-- FLOATING CHAT WIDGET -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        
+        <!-- CHAT INTERFACE (Hidden by default) -->
+        <div id="chat-interface" class="hidden mb-4 w-80 md:w-96 glass-panel rounded-lg overflow-hidden flex flex-col shadow-2xl animate-fade-in-up transition-all">
+            <!-- Chat Header -->
+            <div class="bg-cyan-950/80 p-3 border-b border-cyan-900 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span class="text-xs font-bold text-cyan-100 tracking-wider">TPLINK COMMAND LINE</span>
+                </div>
+                <button onclick="toggleChat()" class="text-cyan-500 hover:text-white transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <!-- Chat Output -->
+            <div id="chat-output" class="h-64 p-3 overflow-y-auto bg-slate-950/50 font-mono text-xs space-y-3">
+                <div class="text-slate-500 italic">Initializing connection...</div>
+                <div class="text-cyan-400">System Ready. Awaiting Input.</div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-3 bg-slate-900 border-t border-slate-700">
+                <!-- API Key Input -->
+                <div class="mb-2">
+                    <label class="block text-[10px] text-slate-500 mb-1 uppercase tracking-wider">Grid Connection Key (API KEY)</label>
+                    <input type="password" id="api-key-input" placeholder="Paste Gemini API Key Here..." class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-cyan-500 font-mono focus:outline-none focus:border-fuchsia-500 placeholder-slate-700 transition-colors" onchange="updateApiKey(this.value)">
+                </div>
+                
+                <div class="relative">
+                    <input type="text" id="user-input" placeholder="Enter command..." class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 font-mono" onkeypress="handleEnter(event)">
+                    <button onclick="sendChat()" class="absolute right-2 top-1.5 text-cyan-500 hover:text-cyan-300">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                </div>
+                <div class="flex justify-between mt-2">
+                     <p class="text-[10px] text-slate-500 mt-1">Powered by Google Gemini</p>
+                     <p class="text-[10px] text-fuchsia-500/50 mt-1 font-mono">SECURE CHANNEL</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOGGLE BUTTON -->
+        <button onclick="toggleChat()" class="glass-panel p-4 rounded-full text-cyan-400 hover:text-white hover:border-cyan-400 transition-all shadow-lg group relative">
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping hidden" id="notification-dot"></span>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full hidden" id="notification-solid"></span>
+            <svg class="w-6 h-6 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        </button>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- API CONFIGURATION ---
+        let apiKey = ""; 
+        const model = "gemini-2.5-flash-preview-09-2025";
+        
+        // Function to update URL with current key
+        function getApiUrl() {
+            return `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+        }
+
+        // --- GEMINI API FUNCTION ---
+        async function callGemini(prompt, systemInstruction = "You are a helpful assistant.") {
+            // Check for API Key before attempting connection
+            if (!apiKey) {
+                return "⚠️ ACCESS DENIED: TPLINK Grid Key missing. Please enter your Google Gemini API Key in the chat console to ignite the connection.";
+            }
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }],
+                systemInstruction: {
+                    parts: [{ text: systemInstruction }]
+                }
+            };
+
+            try {
+                // Exponential backoff logic
+                const delays = [1000, 2000, 4000, 8000, 16000];
+                let attempt = 0;
+
+                while (attempt < 5) {
+                    try {
+                        const response = await fetch(getApiUrl(), {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                             if (response.status === 429) {
+                                throw new Error("Too Many Requests");
+                            }
+                            throw new Error(`HTTP Error: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+                        return data.candidates?.[0]?.content?.parts?.[0]?.text || "NO DATA RECEIVED FROM GRID.";
+                        
+                    } catch (error) {
+                        if (error.message === "Too Many Requests" && attempt < 4) {
+                            console.warn(`Grid busy (429). Retrying in ${delays[attempt]}ms...`);
+                            await new Promise(r => setTimeout(r, delays[attempt]));
+                            attempt++;
+                        } else {
+                            throw error;
+                        }
+                    }
+                }
+                return "GRID CONNECTION LOST (Max Retries Exceeded).";
+
+            } catch (error) {
+                console.error("Grid Error:", error);
+                return `CONNECTION ERROR: ${error.message}`;
+            }
+        }
+
+        // --- GRID ANALYSIS FUNCTION (IN-PAGE) ---
+        async function triggerGridAnalysis(topicPrompt, outputId) {
+            const outputDiv = document.getElementById(outputId);
+            outputDiv.classList.remove('hidden');
+            
+            if (!apiKey) {
+                outputDiv.innerHTML = `<span class="text-fuchsia-400 font-mono">⚠️ ERROR: Grid Key Required. Check Chat Console.</span>`;
+                // Auto-open chat to show input
+                const chat = document.getElementById('chat-interface');
+                if(chat.classList.contains('hidden')) toggleChat();
+                document.getElementById('api-key-input').focus();
+                return;
+            }
+
+            outputDiv.innerHTML = `<span class="animate-pulse text-cyan-400">Connecting to Grid... Authenticating...</span>`;
+
+            const systemPrompt = "You are the TPLINK Grid Analysis Engine for the Moonlight Protocol. Provide a brief, highly technical, sci-fi sounding but scientifically grounded explanation of the requested topic based on thin-film computing, VTB, and distributed systems. Keep it under 100 words. Format with simple HTML bold tags for key terms.";
+            
+            const response = await callGemini(topicPrompt, systemPrompt);
+            
+            // Simulating typing effect
+            outputDiv.innerHTML = '';
+            let i = 0;
+            const speed = 10;
+            
+            // Strip markdown code blocks if present
+            const cleanText = response.replace(/```/g, '').replace(/html/g, '');
+
+            outputDiv.innerHTML = cleanText;
+            outputDiv.classList.add('animate-fade-in');
+        }
+
+        // --- CHAT WIDGET LOGIC ---
+        function toggleChat() {
+            const chat = document.getElementById('chat-interface');
+            chat.classList.toggle('hidden');
+            
+            // Clear notifications
+            document.getElementById('notification-dot').classList.add('hidden');
+            document.getElementById('notification-solid').classList.add('hidden');
+        }
+        
+        function updateApiKey(val) {
+            apiKey = val.trim();
+            const output = document.getElementById('chat-output');
+            const sysMsg = document.createElement('div');
+            sysMsg.className = "bg-slate-900/50 p-1 rounded text-xs text-green-400 font-mono mb-2 text-center border border-green-900";
+            sysMsg.innerText = ">> KEY UPDATED. GRID CONNECTION READY.";
+            output.appendChild(sysMsg);
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendChat();
+        }
+
+        async function sendChat() {
+            const input = document.getElementById('user-input');
+            const output = document.getElementById('chat-output');
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            // Add User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = "text-right mb-2";
+            userMsg.innerHTML = `<span class="inline-block bg-cyan-900/30 text-cyan-100 px-2 py-1 rounded border border-cyan-800">${text}</span>`;
+            output.appendChild(userMsg);
+            
+            input.value = '';
+            output.scrollTop = output.scrollHeight;
+
+            // Loading state
+            const loadingId = 'loading-' + Date.now();
+            const loadingMsg = document.createElement('div');
+            loadingMsg.id = loadingId;
+            loadingMsg.className = "text-left mb-2 text-fuchsia-400 animate-pulse";
+            loadingMsg.innerText = ">> PROCESSING...";
+            output.appendChild(loadingMsg);
+            output.scrollTop = output.scrollHeight;
+
+            // System Prompt
+            const sysPrompt = "You are the MOONLIGHT PROTOCOL AI Assistant. You are succinct, helpful, and speak in a slightly robotic, sci-fi tone. You help users navigate the TPLINK grid.";
+
+            const response = await callGemini(text, sysPrompt);
+
+            // Remove loading
+            document.getElementById(loadingId).remove();
+
+            // Add Bot Message
+            const botMsg = document.createElement('div');
+            botMsg.className = "text-left mb-2";
+            botMsg.innerHTML = `<span class="inline-block text-slate-300">${response}</span>`;
+            output.appendChild(botMsg);
+            output.scrollTop = output.scrollHeight;
+        }
+    </script>
+</body>
+</html>
